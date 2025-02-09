@@ -4,38 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ForeverSoren - 只属于小宝</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #fff0f6;
-            color: #ff4d6d;
-            font-family: "Comic Sans MS", cursive, sans-serif;
+            background-color: #FFE4E1;
+            color: #D95D67;
+            font-family: 'Nunito', sans-serif;
             text-align: center;
             padding: 50px;
         }
         h1 {
-            font-size: 2.5em;
+            font-family: 'Pacifico', cursive;
+            font-size: 2.8em;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 10px rgba(255, 77, 109, 0.5);
+            color: #FF6B81;
+            text-shadow: 2px 2px 8px rgba(255, 107, 129, 0.5);
         }
         #message, #dailyQuote {
             font-size: 1.5em;
             margin-top: 20px;
-            min-height: 50px;
             font-weight: bold;
+            color: #B23A48;
         }
         input, textarea {
             width: 80%;
-            padding: 10px;
+            padding: 12px;
             margin-top: 10px;
-            border: 2px solid #ff4d6d;
+            border: 2px solid #FF6B81;
             border-radius: 15px;
             font-size: 1em;
-            background-color: #ffebf3;
-            color: #ff4d6d;
+            background-color: #FFEEF2;
+            color: #B23A48;
             text-align: center;
+            font-family: 'Nunito', sans-serif;
         }
         button {
-            background-color: #ff85a2;
+            background-color: #FF6B81;
             color: white;
             border: none;
             padding: 15px 30px;
@@ -43,25 +47,44 @@
             cursor: pointer;
             margin-top: 20px;
             border-radius: 50px;
-            box-shadow: 2px 2px 10px rgba(255, 77, 109, 0.3);
+            box-shadow: 2px 2px 10px rgba(255, 107, 129, 0.3);
             transition: all 0.3s;
+            font-family: 'Nunito', sans-serif;
         }
         button:hover {
-            background-color: #ff4d6d;
-            transform: scale(1.05);
+            background-color: #E75480;
+            transform: scale(1.1);
         }
         .cute-heart {
             font-size: 1.5em;
-            color: #ff4d6d;
+            color: #FF6B81;
             animation: heartbeat 1.5s infinite alternate;
         }
         @keyframes heartbeat {
             from { transform: scale(1); }
             to { transform: scale(1.2); }
         }
+        .ribbon {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 50px;
+            background: #FF6B81;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5em;
+            font-family: 'Pacifico', cursive;
+            box-shadow: 2px 2px 10px rgba(255, 107, 129, 0.3);
+        }
     </style>
 </head>
 <body>
+    <div class="ribbon">🎀</div>
     <h1>💕 欢迎来到 Soren 专属空间 💕</h1>
     <p id="dailyQuote" class="cute-heart">💖</p >
 
