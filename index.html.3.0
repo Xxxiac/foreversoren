@@ -66,9 +66,32 @@
     <button onclick="playComfortAudio()">播放安慰语音</button>
 
     <script>
+        let voicesLoaded = false;
+
+        function loadVoices() {
+            speechSynthesis.onvoiceschanged = () => {
+                voicesLoaded = true;
+            };
+            speechSynthesis.getVoices(); 
+        }
+
         function getMaleVoice() {
             const voices = speechSynthesis.getVoices();
             return voices.find(voice => voice.name.includes('Chinese') && voice.name.includes('Male'));
+        }
+
+        function speakText(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'zh-CN';
+
+            if (voicesLoaded) {
+                let maleVoice = getMaleVoice();
+                if (maleVoice) {
+                    utterance.voice = maleVoice;
+                }
+            }
+
+            speechSynthesis.speak(utterance);
         }
 
         function speakMessage() {
@@ -84,24 +107,7 @@
             ];
             const message = messages[Math.floor(Math.random() * messages.length)];
             document.getElementById("message").innerText = message;
-
-            const utterance = new SpeechSynthesisUtterance(message);
-            utterance.lang = 'zh-CN';
-
-            let maleVoice = getMaleVoice();
-            if (maleVoice) {
-                utterance.voice = maleVoice;
-                speechSynthesis.speak(utterance);
-            } else {
-                speechSynthesis.onvoiceschanged = () => {
-                    maleVoice = getMaleVoice();
-                    if (maleVoice) {
-                        utterance.voice = maleVoice;
-                    }
-                    speechSynthesis.speak(utterance);
-                };
-            }
-            speechSynthesis.getVoices();
+            speakText(message);
         }
 
         function playComfortAudio() {
@@ -114,24 +120,7 @@
             ];
             const message = comfortMessages[Math.floor(Math.random() * comfortMessages.length)];
             document.getElementById("message").innerText = message;
-
-            const utterance = new SpeechSynthesisUtterance(message);
-            utterance.lang = 'zh-CN';
-
-            let maleVoice = getMaleVoice();
-            if (maleVoice) {
-                utterance.voice = maleVoice;
-                speechSynthesis.speak(utterance);
-            } else {
-                speechSynthesis.onvoiceschanged = () => {
-                    maleVoice = getMaleVoice();
-                    if (maleVoice) {
-                        utterance.voice = maleVoice;
-                    }
-                    speechSynthesis.speak(utterance);
-                };
-            }
-            speechSynthesis.getVoices();
+            speakText(message);
         }
 
         function makeAWish() {
@@ -165,6 +154,7 @@
         }
 
         window.onload = function() {
+            loadVoices();
             showDailyQuote();
             const savedMemory = localStorage.getItem("savedMemory");
             if (savedMemory) {
