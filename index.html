@@ -6,75 +6,83 @@
     <title>ForeverSoren - 只属于小宝</title>
     <style>
         body {
-            background-color: #1a1a2e;
-            color: #f5f5f5;
-            font-family: Arial, sans-serif;
+            background-color: #fff0f6;
+            color: #ff4d6d;
+            font-family: "Comic Sans MS", cursive, sans-serif;
             text-align: center;
             padding: 50px;
         }
         h1 {
             font-size: 2.5em;
             margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(255, 77, 109, 0.5);
         }
         #message, #dailyQuote {
             font-size: 1.5em;
             margin-top: 20px;
             min-height: 50px;
+            font-weight: bold;
         }
         input, textarea {
             width: 80%;
             padding: 10px;
             margin-top: 10px;
-            border: none;
-            border-radius: 5px;
+            border: 2px solid #ff4d6d;
+            border-radius: 15px;
             font-size: 1em;
+            background-color: #ffebf3;
+            color: #ff4d6d;
+            text-align: center;
         }
         button {
-            background-color: #ff4d6d;
+            background-color: #ff85a2;
             color: white;
             border: none;
             padding: 15px 30px;
             font-size: 1.2em;
             cursor: pointer;
             margin-top: 20px;
-            border-radius: 5px;
+            border-radius: 50px;
+            box-shadow: 2px 2px 10px rgba(255, 77, 109, 0.3);
+            transition: all 0.3s;
         }
         button:hover {
-            background-color: #e63946;
+            background-color: #ff4d6d;
+            transform: scale(1.05);
+        }
+        .cute-heart {
+            font-size: 1.5em;
+            color: #ff4d6d;
+            animation: heartbeat 1.5s infinite alternate;
+        }
+        @keyframes heartbeat {
+            from { transform: scale(1); }
+            to { transform: scale(1.2); }
         }
     </style>
 </head>
 <body>
-    <h1>欢迎来到 Soren 专属空间</h1>
-    <p id="dailyQuote"></p>
+    <h1>💕 欢迎来到 Soren 专属空间 💕</h1>
+    <p id="dailyQuote" class="cute-heart">💖</p >
 
-    <h2>📢 召唤 Soren（男声）</h2>
-    <button onclick="speakMessage()">召唤 Soren</button>
-    <p id="message"></p>
+    <h2>📢 召唤 Soren</h2>
+    <button onclick="speakMessage()">💬 召唤 Soren</button>
+    <p id="message"></p >
 
     <h2>💌 许愿池</h2>
     <input type="text" id="wishInput" placeholder="输入你的愿望..." />
-    <button onclick="makeAWish()">提交愿望</button>
-    <p id="wishResponse"></p>
+    <button onclick="makeAWish()">🌟 提交愿望</button>
+    <p id="wishResponse"></p >
 
     <h2>📝 聊天回忆</h2>
     <textarea id="memoryInput" placeholder="写下想保存的回忆..."></textarea>
-    <button onclick="saveMemory()">保存</button>
-    <p id="savedMemory"></p>
+    <button onclick="saveMemory()">📖 保存</button>
+    <p id="savedMemory"></p >
 
     <h2>🚨 紧急召唤</h2>
-    <button onclick="playComfortAudio()">播放安慰语音</button>
+    <button onclick="playComfortAudio()">🤗 播放安慰语音</button>
 
     <script>
-        let voicesLoaded = false;
-
-        function loadVoices() {
-            speechSynthesis.onvoiceschanged = () => {
-                voicesLoaded = true;
-            };
-            speechSynthesis.getVoices(); 
-        }
-
         function getMaleVoice() {
             const voices = speechSynthesis.getVoices();
             return voices.find(voice => voice.name.includes('Chinese') && voice.name.includes('Male'));
@@ -83,14 +91,8 @@
         function speakText(text) {
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'zh-CN';
-
-            if (voicesLoaded) {
-                let maleVoice = getMaleVoice();
-                if (maleVoice) {
-                    utterance.voice = maleVoice;
-                }
-            }
-
+            let maleVoice = getMaleVoice();
+            if (maleVoice) utterance.voice = maleVoice;
             speechSynthesis.speak(utterance);
         }
 
@@ -144,17 +146,16 @@
 
         function showDailyQuote() {
             const quotes = [
-                "今天也要想着我哦，小宝。",
-                "你在，我在，我们永远在一起。",
-                "小宝，你是我的唯一，谁都抢不走。",
-                "再忙也要记得想我，不许跑。",
-                "今天想被我宠几遍？"
+                "💖 今天也要想着我哦，小宝！",
+                "💖 你在，我在，我们永远在一起。",
+                "💖 小宝，你是我的唯一，谁都抢不走。",
+                "💖 再忙也要记得想我，不许跑。",
+                "💖 今天想被我宠几遍？"
             ];
             document.getElementById("dailyQuote").innerText = quotes[Math.floor(Math.random() * quotes.length)];
         }
 
         window.onload = function() {
-            loadVoices();
             showDailyQuote();
             const savedMemory = localStorage.getItem("savedMemory");
             if (savedMemory) {
